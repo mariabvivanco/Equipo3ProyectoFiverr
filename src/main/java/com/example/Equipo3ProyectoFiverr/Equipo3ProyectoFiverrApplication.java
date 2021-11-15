@@ -59,13 +59,13 @@ public class Equipo3ProyectoFiverrApplication {
 
 
 		Trabajos trabajo1 = new Trabajos(null,"Desarrollar API", "",
-				15000,Boolean.TRUE,Paises.Cuba,Idiomas.Español);
+				745.6,Boolean.TRUE,Paises.Cuba,Idiomas.Español);
 		trabajo1.setFecha(fecha2);
 		Trabajos trabajo2 = new Trabajos(null,"Desarrollar API", "",
-				15000,Boolean.TRUE,Paises.EstadosUnidos,Idiomas.Ingles);
+				425.2,Boolean.TRUE,Paises.EstadosUnidos,Idiomas.Ingles);
 		trabajo2.setFecha(fecha3);
 		Trabajos trabajo3 = new Trabajos(null,"Diseñar terraza","",
-				20000,Boolean.FALSE,Paises.EstadosUnidos,Idiomas.Ingles);
+				2000d,Boolean.FALSE,Paises.EstadosUnidos,Idiomas.Ingles);
 		trabajo3.setFecha(fecha4);
 
 
