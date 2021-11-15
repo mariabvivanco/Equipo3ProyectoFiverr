@@ -48,11 +48,9 @@ public class Trabajos {
     private Set<Categorias> categorias = new HashSet<>();
 
 
-    @Column(name = "salario_min")
-    private Integer salarioMin;
+    @Column(name = "precio")
+    private Integer precio;
 
-    @Column(name = "salario_max")
-    private Integer salarioMax;
 
     private Boolean verificado;
 
@@ -78,13 +76,12 @@ public class Trabajos {
     public Trabajos() {
     }
 
-    public Trabajos(Long id, String nombre, String descripcion, Integer salarioMin, Integer salarioMax, Boolean verificado,
+    public Trabajos(Long id, String nombre, String descripcion, Integer precio,  Boolean verificado,
                     Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-                this.salarioMin = salarioMin;
-        this.salarioMax = salarioMax;
+        this.precio = precio;
         this.verificado = verificado;
         this.pais = pais;
         this.idiomas = idiomas;
@@ -92,15 +89,15 @@ public class Trabajos {
     }
 
     public Trabajos(Long id, String nombre, String descripcion, Set<Empleadores> empleadores,
-                    Set<Categorias> categorias, Integer salarioMin, Integer salarioMax, Boolean verificado,
+                    Set<Categorias> categorias, Integer precio,  Boolean verificado,
                     LocalDate fecha, Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.empleadores = empleadores;
         this.categorias = categorias;
-        this.salarioMin = salarioMin;
-        this.salarioMax = salarioMax;
+        this.precio = precio;
+
         this.verificado = verificado;
         this.fecha = fecha;
         this.pais = pais;
@@ -108,7 +105,7 @@ public class Trabajos {
     }
 
     public Trabajos(Long id, String nombre, String descripcion, String image, Set<Empleadores> empleadores,
-                    Set<Categorias> categorias, Integer salarioMin, Integer salarioMax, Boolean verificado,
+                    Set<Categorias> categorias, Integer precio,  Boolean verificado,
                     LocalDate fecha, Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
@@ -116,8 +113,7 @@ public class Trabajos {
         this.image = image;
         this.empleadores = empleadores;
         this.categorias = categorias;
-        this.salarioMin = salarioMin;
-        this.salarioMax = salarioMax;
+        this.precio= precio;
         this.verificado = verificado;
         this.fecha = fecha;
         this.pais = pais;
@@ -148,22 +144,12 @@ public class Trabajos {
         this.descripcion = descripcion;
     }
 
-
-
-    public Integer getSalarioMin() {
-        return salarioMin;
+    public Integer getPrecio() {
+        return precio;
     }
 
-    public void setSalarioMin(Integer salarioMin) {
-        this.salarioMin = salarioMin;
-    }
-
-    public Integer getSalarioMax() {
-        return salarioMax;
-    }
-
-    public void setSalarioMax(Integer salarioMax) {
-        this.salarioMax = salarioMax;
+    public void setPrecio(Integer precio) {
+        this.precio = precio;
     }
 
     public Boolean getVerificado() {

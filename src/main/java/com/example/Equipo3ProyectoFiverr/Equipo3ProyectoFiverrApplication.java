@@ -52,19 +52,19 @@ public class Equipo3ProyectoFiverrApplication {
 				TipoEmpresa.Particular,Paises.España);
 		Empleadores empleador2= new Empleadores(null,"EmpSof","Empresa de Software",
 				TipoEmpresa.Particular,Paises.España);
-		empleador2.setImage("");
-		empleador1.setImage("");
+		empleador2.setImage("https://source.unsplash.com/featured/?design/600x300/4150");
+		empleador1.setImage("https://source.unsplash.com/featured/?design/600x300/4151");
 
 		empleadoresRepository.saveAll(Arrays.asList(empleador1,empleador2));
 
 
-		Trabajos trabajo1 = new Trabajos(null,"Desarrollar API", "",12000,
+		Trabajos trabajo1 = new Trabajos(null,"Desarrollar API", "",
 				15000,Boolean.TRUE,Paises.Cuba,Idiomas.Español);
 		trabajo1.setFecha(fecha2);
-		Trabajos trabajo2 = new Trabajos(null,"Desarrollar API", "",12000,
+		Trabajos trabajo2 = new Trabajos(null,"Desarrollar API", "",
 				15000,Boolean.TRUE,Paises.EstadosUnidos,Idiomas.Ingles);
 		trabajo2.setFecha(fecha3);
-		Trabajos trabajo3 = new Trabajos(null,"Diseñar terraza","",15000,
+		Trabajos trabajo3 = new Trabajos(null,"Diseñar terraza","",
 				20000,Boolean.FALSE,Paises.EstadosUnidos,Idiomas.Ingles);
 		trabajo3.setFecha(fecha4);
 
@@ -86,9 +86,9 @@ public class Equipo3ProyectoFiverrApplication {
 
 		trabajo1.addEmpleador(empleador2);
 		trabajo2.addEmpleador(empleador1);
-		trabajo1.setImage("");
-		trabajo2.setImage("");
-		trabajo3.setImage("");
+		trabajo1.setImage("https://source.unsplash.com/featured/?design/600x300/4181");
+		trabajo2.setImage("https://source.unsplash.com/featured/?design/600x300/4182");
+		trabajo3.setImage("https://source.unsplash.com/featured/?design/600x300/4183");
 
 
 		trabajosRepository.saveAll(Arrays.asList(trabajo1,trabajo2,trabajo3));
@@ -98,10 +98,10 @@ public class Equipo3ProyectoFiverrApplication {
 		Opiniones opinion2 = new Opiniones(null,5,"esta muy bien",trabajo1,empleador2);
 		Opiniones opinion3 = new Opiniones(null,4,"esta por ahi",trabajo1,empleador2);
 		Opiniones opinion4 = new Opiniones(null,4,"esta  bien",trabajo1,empleador2);
-		Opiniones opinion5 = new Opiniones(null,5,"esta muy bien",trabajo1,empleador2);
-		Opiniones opinion6 = new Opiniones(null,4,"esta muy bien",trabajo1,empleador2);
+		Opiniones opinion5 = new Opiniones(null,5,"esta muy bien",trabajo2,empleador2);
+		Opiniones opinion6 = new Opiniones(null,4,"esta muy bien",trabajo2,empleador2);
 		Opiniones opinion7 = new Opiniones(null,4,"esta  bien",trabajo3,empleador1);
-		opinionesRepository.saveAll(Arrays.asList(opinion1,opinion2,opinion3,opinion4,opinion5,opinion6));
+		opinionesRepository.saveAll(Arrays.asList(opinion1,opinion2,opinion3,opinion4,opinion5,opinion6,opinion7));
 
 
 
