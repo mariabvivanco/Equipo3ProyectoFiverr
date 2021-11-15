@@ -49,7 +49,7 @@ public class Trabajos {
 
 
     @Column(name = "precio")
-    private Integer precio;
+    private Double precio;
 
 
     private Boolean verificado;
@@ -76,7 +76,7 @@ public class Trabajos {
     public Trabajos() {
     }
 
-    public Trabajos(Long id, String nombre, String descripcion, Integer precio,  Boolean verificado,
+    public Trabajos(Long id, String nombre, String descripcion, Double precio,  Boolean verificado,
                     Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
@@ -89,7 +89,7 @@ public class Trabajos {
     }
 
     public Trabajos(Long id, String nombre, String descripcion, Set<Empleadores> empleadores,
-                    Set<Categorias> categorias, Integer precio,  Boolean verificado,
+                    Set<Categorias> categorias, Double precio,  Boolean verificado,
                     LocalDate fecha, Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
@@ -105,7 +105,7 @@ public class Trabajos {
     }
 
     public Trabajos(Long id, String nombre, String descripcion, String image, Set<Empleadores> empleadores,
-                    Set<Categorias> categorias, Integer precio,  Boolean verificado,
+                    Set<Categorias> categorias, Double precio,  Boolean verificado,
                     LocalDate fecha, Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
@@ -144,11 +144,11 @@ public class Trabajos {
         this.descripcion = descripcion;
     }
 
-    public Integer getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Integer precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
