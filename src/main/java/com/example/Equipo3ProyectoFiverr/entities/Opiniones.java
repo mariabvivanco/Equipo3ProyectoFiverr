@@ -4,6 +4,7 @@ package com.example.Equipo3ProyectoFiverr.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "opiniones")
 public class Opiniones {
 
     @Id
@@ -24,6 +25,14 @@ public class Opiniones {
     private Empleadores empleador;
 
     public Opiniones() {
+    }
+
+    public Opiniones(Long id, int calificacion, String descripcion, Trabajos trabajo, Empleadores empleador) {
+        this.id = id;
+        this.calificacion = calificacion;
+        this.descripcion = descripcion;
+        this.trabajo = trabajo;
+        this.empleador = empleador;
     }
 
     public Long getId() {
