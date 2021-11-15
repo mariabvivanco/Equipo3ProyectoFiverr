@@ -23,6 +23,7 @@ public class TrabajosDto {
     private String descripcion;
     private Integer opiniones;
     private Double promedio;
+    private Double precio;
     private Set<Categorias> categorias = new HashSet<>();
     private Set<Empleadores> empleadores = new HashSet<>();
     private LocalDate fecha;
@@ -31,7 +32,7 @@ public class TrabajosDto {
     }
 
     public TrabajosDto(Long id, String nombre, String image, String descripcion, Set<Categorias> categorias,
-                       Set<Empleadores> empleadores, LocalDate fecha, Paises pais, Idiomas idiomas) {
+                       Set<Empleadores> empleadores, LocalDate fecha, Paises pais, Idiomas idiomas, Double precio) {
         this.id = id;
         this.nombre = nombre;
         this.image = image;
@@ -41,6 +42,7 @@ public class TrabajosDto {
         this.fecha = fecha;
         this.pais = pais;
         this.idiomas = idiomas;
+        this.precio=precio;
     }
 
     @Enumerated//(EnumType.ORDINAL)
@@ -135,5 +137,13 @@ public class TrabajosDto {
 
     public void setIdiomas(Idiomas idiomas) {
         this.idiomas = idiomas;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 }
