@@ -54,7 +54,8 @@ public class TrabajosController {
         for(int i=0; i<trabajos.size();i++){
             trabajoDto = new TrabajosDto(trabajos.get(i).getId(),trabajos.get(i).getNombre(),trabajos.get(i).getImage(),
                     trabajos.get(i).getDescripcion(), trabajos.get(i).getCategorias(),trabajos.get(i).getEmpleadores(),
-                    trabajos.get(i).getFecha(),trabajos.get(i).getPais(),trabajos.get(i).getIdiomas());
+                    trabajos.get(i).getFecha(),trabajos.get(i).getPais(),trabajos.get(i).getIdiomas(),
+                    trabajos.get(i).getPrecio());
 
             int sumaOpiniones=0, cantOpiniones=0;
             double promedio=0;
