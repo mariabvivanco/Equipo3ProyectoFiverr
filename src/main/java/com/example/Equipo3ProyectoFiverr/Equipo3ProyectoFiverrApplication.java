@@ -13,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 @SpringBootApplication
 public class Equipo3ProyectoFiverrApplication {
@@ -21,7 +23,7 @@ public class Equipo3ProyectoFiverrApplication {
 	public static void main(String[] args) {
 		ApplicationContext context =  SpringApplication.run(Equipo3ProyectoFiverrApplication.class, args);
 		CategoriasRepository categoriasRepository = context.getBean(CategoriasRepository.class);
-		EmpleadoresRepository empleadoresReository = context.getBean(EmpleadoresRepository.class);
+		EmpleadoresRepository empleadoresRepository = context.getBean(EmpleadoresRepository.class);
 		OpinionesRepository opinionesRepository = context.getBean(OpinionesRepository.class);
 		TrabajosRepository trabajosRepository = context.getBean(TrabajosRepository.class);
 
@@ -36,22 +38,25 @@ public class Equipo3ProyectoFiverrApplication {
 
 		Categorias categoria1 = new Categorias(null,"Desarrollo Software",
 				"Sirve para desarrollar Software" );
-		//categoria1.setTrabajos();
 		Categorias categoria2 = new Categorias(null,"Diseño Sitios Web",
 				"Sirve para diseñar sitios" );
 		Categorias categoria3 = new Categorias(null,"Diseño Interiores",
 				"Sirve para diseñar hogares" );
+		Categorias categoria4 = new Categorias(null,"Diseño Exteriores",
+				"Sirve para diseñar terrazas" );
 
-		categoriasRepository.save(categoria1);
-		categoriasRepository.save(categoria2);
-		categoriasRepository.save(categoria3);
+		categoriasRepository.saveAll(Arrays.asList(categoria1,categoria2,categoria3,categoria4));
+
 
 		Empleadores empleador1 = new Empleadores(null,"EmpDis","Empresa de Diseño",
 				TipoEmpresa.Particular,Paises.España);
 		Empleadores empleador2= new Empleadores(null,"EmpSof","Empresa de Software",
 				TipoEmpresa.Particular,Paises.España);
-		empleadoresReository.save(empleador1);
-		empleadoresReository.save(empleador2);
+		empleador2.setImage("");
+		empleador1.setImage("");
+
+		empleadoresRepository.saveAll(Arrays.asList(empleador1,empleador2));
+
 
 		Trabajos trabajo1 = new Trabajos(null,"Desarrollar API", "",12000,
 				15000,Boolean.TRUE,Paises.Cuba,Idiomas.Español);
@@ -64,10 +69,29 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo3.setFecha(fecha4);
 
 
-		trabajosRepository.save(trabajo1);
-		trabajosRepository.save(trabajo2);
-		trabajosRepository.save(trabajo3);
 
+
+		List<Categorias> categorias1 = Arrays.asList(categoria1,categoria2);
+		List<Categorias> categorias2 = Arrays.asList(categoria3,categoria4);
+
+		for (Categorias categoria : categorias1) {
+			trabajo1.addCategoria(categoria);
+
+		}
+		for (Categorias categoria : categorias2) {
+			trabajo3.addCategoria(categoria);
+
+		}
+		trabajo2.addCategoria(categoria1);
+
+		trabajo1.addEmpleador(empleador2);
+		trabajo2.addEmpleador(empleador1);
+		trabajo1.setImage("");
+		trabajo2.setImage("");
+		trabajo3.setImage("");
+
+
+		trabajosRepository.saveAll(Arrays.asList(trabajo1,trabajo2,trabajo3));
 
 
 		Opiniones opinion1 = new Opiniones(null,4,"esta mas o menos",trabajo1,empleador2);
@@ -77,13 +101,8 @@ public class Equipo3ProyectoFiverrApplication {
 		Opiniones opinion5 = new Opiniones(null,5,"esta muy bien",trabajo1,empleador2);
 		Opiniones opinion6 = new Opiniones(null,4,"esta muy bien",trabajo1,empleador2);
 		Opiniones opinion7 = new Opiniones(null,4,"esta  bien",trabajo3,empleador1);
-		opinionesRepository.save(opinion1);
-		opinionesRepository.save(opinion2);
-		opinionesRepository.save(opinion3);
-		opinionesRepository.save(opinion4);
-		opinionesRepository.save(opinion5);
-		opinionesRepository.save(opinion6);
-		opinionesRepository.save(opinion7);
+		opinionesRepository.saveAll(Arrays.asList(opinion1,opinion2,opinion3,opinion4,opinion5,opinion6));
+
 
 
 	}

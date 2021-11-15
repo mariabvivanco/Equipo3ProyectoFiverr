@@ -224,4 +224,28 @@ public class Trabajos {
     public void setCategorias(Set<Categorias> categorias) {
         this.categorias = categorias;
     }
+
+    public void addCategoria(Categorias categoria){
+        categorias.add(categoria);
+        categoria.getTrabajos().add(this);
+    }
+
+    public void removeCategoria(Categorias categoria, boolean categoriaExists){
+        categorias.remove(categoria);
+        if (categoriaExists) {
+            categoria.getTrabajos().remove(this);
+        }
+    }
+
+    public void addEmpleador(Empleadores empleador){
+        empleadores.add(empleador);
+        empleador.getTrabajos().add(this);
+    }
+
+    public void removeEmpleador(Empleadores empleador, boolean empleadorExists){
+        empleadores.remove(empleador);
+        if (empleadorExists) {
+            empleador.getTrabajos().remove(this);
+        }
+    }
 }
