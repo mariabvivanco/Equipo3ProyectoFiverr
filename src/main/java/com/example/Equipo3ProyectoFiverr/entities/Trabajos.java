@@ -88,8 +88,21 @@ public class Trabajos {
 
     }
 
+    public Trabajos(Long id, String nombre, String descripcion, String image, Double precio, Boolean verificado,
+                    LocalDate fecha, Paises pais, Idiomas idiomas) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.image = image;
+        this.precio = precio;
+        this.verificado = verificado;
+        this.fecha = fecha;
+        this.pais = pais;
+        this.idiomas = idiomas;
+    }
+
     public Trabajos(Long id, String nombre, String descripcion, Set<Empleadores> empleadores,
-                    Set<Categorias> categorias, Double precio,  Boolean verificado,
+                    Set<Categorias> categorias, Double precio, Boolean verificado,
                     LocalDate fecha, Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;

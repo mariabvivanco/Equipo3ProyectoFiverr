@@ -2,6 +2,8 @@ package com.example.Equipo3ProyectoFiverr.controller;
 
 
 import com.example.Equipo3ProyectoFiverr.dto.TrabajosDto;
+import com.example.Equipo3ProyectoFiverr.entities.Categorias;
+import com.example.Equipo3ProyectoFiverr.entities.Empleadores;
 import com.example.Equipo3ProyectoFiverr.entities.Opiniones;
 import com.example.Equipo3ProyectoFiverr.entities.Trabajos;
 import com.example.Equipo3ProyectoFiverr.repositories.CategoriasRepository;
@@ -79,7 +81,7 @@ public class TrabajosController {
     }
 
     /**
-     * Buscar ofertas según id
+     * Buscar trabajos según id
      * Request
      * Response
      */
@@ -91,6 +93,207 @@ public class TrabajosController {
             return ResponseEntity.ok(trabajosOpt.get());
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    /**
+     * Crear un nuevo trabajo en la base de datos
+     *
+     * @param trabajo
+     * @return
+     */
+    @CrossOrigin
+    @PostMapping("/api/trabajos")
+    public ResponseEntity<Trabajos> create(@RequestBody Trabajos trabajo) {
+        if(trabajo.getId() != null) {
+            log.warn("Intentando crear un trabajo con id");
+            return ResponseEntity.badRequest().build();
+        }
+
+        Set<Categorias> categorias = trabajo.getCategorias();
+
+        for (Categorias categoria: categorias) {
+            if(categoria.getId() == null) {
+                log.info("Creando categoria inexistente: " + categoria.getNombre());
+                categoriasRepository.save(categoria);
+            }
+        }
+
+        Set<Empleadores> empleadores = trabajo.getEmpleadores();
+
+        for (Empleadores empleador: empleadores) {
+            if(empleador.getId() == null) {
+                log.info("Creando empleador inexistente: " + empleador.getNombre());
+                empleadoresRepository.save(empleador);
+            }
+        }
+
+       Trabajos trabajoAGuardar = new Trabajos(
+
+               null,
+               trabajo.getNombre(),
+               trabajo.getDescripcion(),
+               trabajo.getImage(),
+               trabajo.getPrecio(),
+               trabajo.getVerificado(),
+               trabajo.getFecha(),
+               trabajo.getPais(),
+               trabajo.getIdiomas()
+
+        );
+
+        for (Empleadores empleador: trabajo.getEmpleadores()) {
+            trabajoAGuardar.addEmpleador(empleador);
+        }
+        for (Categorias categoria: trabajo.getCategorias()) {
+            trabajoAGuardar.addCategoria(categoria);
+        }
+
+        Trabajos result = trabajosRepository.save(trabajoAGuardar);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Actualizar una trabjo en base de datos.
+     *
+     * @param trabajo
+     * @return
+     */
+    @CrossOrigin
+    @PutMapping("/api/trabajos")
+    public ResponseEntity<Trabajos> update(@RequestBody Trabajos trabajo) {
+        if (trabajo.getId() == null) {
+            log.warn("Intentando actualizar un trabajo inexistente");
+            return ResponseEntity.badRequest().build();
+        }
+        if (!trabajosRepository.existsById(trabajo.getId())) {
+            log.warn("Intentando actualizar un trabajo inexistente");
+            return ResponseEntity.notFound().build();
+        }
+
+        Set<Categorias> categorias = trabajo.getCategorias();
+
+        for (Categorias categoria: categorias) {
+            if(categoria.getId() == null) {
+                log.info("Creando categoria inexistente: " + categoria.getNombre());
+                categoriasRepository.save(categoria);
+            }
+        }
+
+        Set<Empleadores> empleadores = trabajo.getEmpleadores();
+
+        for (Empleadores empleador: empleadores) {
+            if(empleador.getId() == null) {
+                log.info("Creando empleador inexistente: " + empleador.getNombre());
+                empleadoresRepository.save(empleador);
+            }
+        }
+
+
+        Optional<Trabajos> trabajoOpt = trabajosRepository.findById(trabajo.getId());
+        if (trabajoOpt.isPresent()) {
+            Trabajos trabajoAntiguo = trabajoOpt.get();
+            desvincularCategorias(trabajoAntiguo);
+            desvincularEmpleadores(trabajoAntiguo);
+        }
+
+        Trabajos trabajoAGuardar = new Trabajos(
+
+                trabajo.getId(),
+                trabajo.getNombre(),
+                trabajo.getDescripcion(),
+                trabajo.getImage(),
+                trabajo.getPrecio(),
+                trabajo.getVerificado(),
+                trabajo.getFecha(),
+                trabajo.getPais(),
+                trabajo.getIdiomas()
+
+        );
+
+        for (Empleadores empleador: trabajo.getEmpleadores()) {
+            trabajoAGuardar.addEmpleador(empleador);
+        }
+        for (Categorias categoria: trabajo.getCategorias()) {
+            trabajoAGuardar.addCategoria(categoria);
+        }
+
+        Trabajos result = trabajosRepository.save(trabajoAGuardar);
+        log.info("Actualizando trabajo: " + trabajoAGuardar.getId());
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Eliminar un trabajo en la base de datos
+     * @param id
+     * @return
+     */
+    @CrossOrigin
+    @DeleteMapping("/api/trabajos/{id}")
+    public ResponseEntity<Trabajos> delete(@PathVariable Long id) {
+
+        if (!trabajosRepository.existsById(id)) {
+            log.warn("Intentando eliminar un trabajo inexistente");
+            return ResponseEntity.notFound().build();
+        }
+
+        Optional<Trabajos> trabajoOpt = trabajosRepository.findById(id);
+        if (trabajoOpt.isPresent()) {
+            Trabajos trabajoAnterior = trabajoOpt.get();
+            desvincularCategorias(trabajoAnterior);
+            desvincularEmpleadores(trabajoAnterior);
+        }
+
+        trabajosRepository.deleteById(id);
+        log.info("Eliminando trabajo: " + id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Eliminar todos los trabajos de la base de datos.
+     *
+     * @return
+     */
+    @CrossOrigin
+    @DeleteMapping("/api/trabajos")
+    public ResponseEntity<Trabajos> deleteAll() {
+
+        List<Trabajos> trabajos = trabajosRepository.findAll();
+        for (Trabajos trabajo : trabajos) {
+            desvincularCategorias(trabajo);
+            desvincularEmpleadores(trabajo);
+
+        }
+
+        List<Categorias> categorias = categoriasRepository.findAll();
+        List<Empleadores> empleadores = empleadoresRepository.findAll();
+
+        empleadoresRepository.deleteAll();
+        log.info("Eliminando todos los trabajos");
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Método que desvincula cada trabajo de ls categorias que están ligadas a ellos.
+     *
+     * @param trabajo
+     */
+    private void desvincularCategorias(Trabajos trabajo) {
+        Set<Categorias> categoriasABorrar = new HashSet<>(trabajo.getCategorias());
+        for (Categorias categoria : categoriasABorrar) {
+            trabajo.removeCategoria(categoria, true);
+        }
+    }
+
+    /**
+     * Método que desvincula cada trabajo de los empleadores están ligadas a ellos.
+     *
+     * @param trabajo
+     */
+    private void desvincularEmpleadores(Trabajos trabajo) {
+        Set<Empleadores> empleadoresABorrar = new HashSet<>(trabajo.getEmpleadores());
+        for (Empleadores empleador: empleadoresABorrar) {
+            trabajo.removeEmpleador(empleador, true);
         }
     }
 
