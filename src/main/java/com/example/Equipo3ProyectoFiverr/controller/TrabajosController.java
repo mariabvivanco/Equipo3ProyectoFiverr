@@ -13,6 +13,7 @@ import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -39,12 +40,14 @@ public class TrabajosController {
      * Buscar todas los trabajos en base de datos
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajostodos")
     public List<Trabajos> findAll() {
         return trabajosRepository.findAll();
     }
 
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajos")
     public List<TrabajosDto> findAllT() {
 
@@ -86,6 +89,7 @@ public class TrabajosController {
      * Response
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/trabajos/{id}")
     public ResponseEntity<Trabajos> findById(@PathVariable Long id) {
         Optional<Trabajos> trabajosOpt = trabajosRepository.findById(id);
@@ -103,6 +107,7 @@ public class TrabajosController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/trabajos")
     public ResponseEntity<Trabajos> create(@RequestBody Trabajos trabajo) {
         if(trabajo.getId() != null) {
@@ -160,6 +165,7 @@ public class TrabajosController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/trabajos")
     public ResponseEntity<Trabajos> update(@RequestBody Trabajos trabajo) {
         if (trabajo.getId() == null) {
@@ -229,6 +235,7 @@ public class TrabajosController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/trabajos/{id}")
     public ResponseEntity<Trabajos> delete(@PathVariable Long id) {
 
@@ -255,6 +262,7 @@ public class TrabajosController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/trabajos")
     public ResponseEntity<Trabajos> deleteAll() {
 

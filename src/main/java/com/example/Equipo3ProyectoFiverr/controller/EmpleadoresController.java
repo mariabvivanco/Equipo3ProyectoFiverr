@@ -10,6 +10,7 @@ import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class EmpleadoresController {
      * Buscar todos los empleadores en Base de Datos
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/empleadores")
     public List<Empleadores> findAll() {
         return empleadoresRepository.findAll();
@@ -44,6 +46,7 @@ public class EmpleadoresController {
      * Response
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/empleadores/{id}")
     public ResponseEntity<Empleadores> findById(@PathVariable Long id) {
         Optional<Empleadores> empleadoresOpt = empleadoresRepository.findById(id);
@@ -61,6 +64,7 @@ public class EmpleadoresController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/empleadores")
     public ResponseEntity<Empleadores> create(@RequestBody Empleadores empleador) {
         if (empleador.getId() != null) {
@@ -86,6 +90,7 @@ public class EmpleadoresController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/empleadores")
     public ResponseEntity<Empleadores> update(@RequestBody Empleadores empleador) {
         if (empleador.getId() == null) {
@@ -108,6 +113,7 @@ public class EmpleadoresController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/empleadores/{id}")
     public ResponseEntity<Empleadores> delete(@PathVariable Long id) {
 
@@ -138,6 +144,7 @@ public class EmpleadoresController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/empleadores")
     public ResponseEntity<Empleadores> deleteAll() {
         log.info("Petición REST para eliminar todos los empleadores");

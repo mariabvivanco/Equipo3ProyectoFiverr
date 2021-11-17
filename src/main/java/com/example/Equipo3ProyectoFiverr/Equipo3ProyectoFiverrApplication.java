@@ -1,21 +1,14 @@
 package com.example.Equipo3ProyectoFiverr;
 
-import com.example.Equipo3ProyectoFiverr.entities.Categorias;
-import com.example.Equipo3ProyectoFiverr.entities.Empleadores;
-import com.example.Equipo3ProyectoFiverr.entities.Opiniones;
-import com.example.Equipo3ProyectoFiverr.entities.Trabajos;
-import com.example.Equipo3ProyectoFiverr.repositories.CategoriasRepository;
-import com.example.Equipo3ProyectoFiverr.repositories.EmpleadoresRepository;
-import com.example.Equipo3ProyectoFiverr.repositories.OpinionesRepository;
-import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
+import com.example.Equipo3ProyectoFiverr.entities.*;
+import com.example.Equipo3ProyectoFiverr.repositories.*;
+import com.example.Equipo3ProyectoFiverr.service.UserServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 public class Equipo3ProyectoFiverrApplication {
@@ -26,6 +19,8 @@ public class Equipo3ProyectoFiverrApplication {
 		EmpleadoresRepository empleadoresRepository = context.getBean(EmpleadoresRepository.class);
 		OpinionesRepository opinionesRepository = context.getBean(OpinionesRepository.class);
 		TrabajosRepository trabajosRepository = context.getBean(TrabajosRepository.class);
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		RoleRepository roleRepository = context.getBean(RoleRepository.class);
 
 		LocalDate fecha1 = LocalDate.of(2020, Calendar.DECEMBER, 23);
 		LocalDate fecha2 = LocalDate.of(2021, Calendar.FEBRUARY, 7);
@@ -67,6 +62,13 @@ public class Equipo3ProyectoFiverrApplication {
 		Trabajos trabajo3 = new Trabajos(null,"Diseñar terraza","",
 				2000d,Boolean.FALSE,Paises.EstadosUnidos,Idiomas.Ingles);
 		trabajo3.setFecha(fecha4);
+		Trabajos trabajo10 = new Trabajos(null,"Diseñaré tu identidad empresarial", "¿Buscas algo único, creativo, " +
+				"llamativo, muy profesional y con un diseño limpio? Has dado con la oferta adecuada para tu trabajo " +
+				"de diseño gráfico.\n" +
+				"\n" +
+				"Puedo aportar ideas creativas basadas en los requisitos especiales de mis clientes.",
+				745.6,Boolean.TRUE,Paises.Cuba,Idiomas.Español);
+		trabajo10.setFecha(fecha4);
 
 
 
@@ -91,7 +93,7 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo3.setImage("https://source.unsplash.com/featured/?design/600x300/4183");
 
 
-		trabajosRepository.saveAll(Arrays.asList(trabajo1,trabajo2,trabajo3));
+		trabajosRepository.saveAll(Arrays.asList(trabajo1,trabajo2,trabajo3,trabajo10));
 
 
 		Opiniones opinion1 = new Opiniones(null,4,"esta mas o menos",trabajo1,empleador2);
@@ -102,6 +104,17 @@ public class Equipo3ProyectoFiverrApplication {
 		Opiniones opinion6 = new Opiniones(null,4,"esta muy bien",trabajo2,empleador2);
 		Opiniones opinion7 = new Opiniones(null,4,"esta  bien",trabajo3,empleador1);
 		opinionesRepository.saveAll(Arrays.asList(opinion1,opinion2,opinion3,opinion4,opinion5,opinion6,opinion7));
+
+		Role role1 = new Role(1,"ADMIN", "Rol Admin");
+		Role role2 = new Role(2,"USER", "Rol User");
+		roleRepository.save(role1);
+		roleRepository.save(role2);
+		User user = new User(1,"admin","$2a$10$DTAejq8zVwf.dMadV1SAvuNXAbXjroY.G7dWpS1tzoGolwn7nexTm","","","","");
+		Set<Role> useradmin =new HashSet<>();
+		useradmin.add(role1);
+		useradmin.add(role2);
+		user.setRoles(useradmin);
+		userRepository.save(user);
 
 
 
