@@ -11,6 +11,7 @@ import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class OpinionesController {
      * Buscar todas las opiniones en Base de Datos
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/opiniones")
     public List<Opiniones> findAll() {
         return opinionesRepository.findAll();
@@ -48,6 +50,7 @@ public class OpinionesController {
      * Response
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/opiniones/{id}")
     public ResponseEntity<Opiniones> findById(@PathVariable Long id) {
         Optional<Opiniones> opinionesOpt =opinionesRepository.findById(id);
@@ -65,6 +68,7 @@ public class OpinionesController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/opiniones")
     public ResponseEntity<Opiniones> create(@RequestBody Opiniones opinion) {
         if (opinion.getId() != null) {
@@ -83,6 +87,7 @@ public class OpinionesController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/opiniones")
     public ResponseEntity<Opiniones> update(@RequestBody Opiniones opinion) {
         if (opinion.getId() == null) {
@@ -105,6 +110,7 @@ public class OpinionesController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/opiniones/{id}")
     public ResponseEntity<Opiniones> delete(@PathVariable Long id) {
 
@@ -123,6 +129,7 @@ public class OpinionesController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/opiniones")
     public ResponseEntity<Opiniones> deleteAll() {
         log.info("Petición REST para eliminar todas las opiniones");

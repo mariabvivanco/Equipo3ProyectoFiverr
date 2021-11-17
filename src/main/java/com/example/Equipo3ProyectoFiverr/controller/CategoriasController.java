@@ -8,6 +8,7 @@ import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class CategoriasController {
      * Buscar todas las categorías en Base de Datos
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/categorias")
     public List<Categorias> findAll() {
         return categoriasRepository.findAll();
@@ -42,6 +44,7 @@ public class CategoriasController {
      * Response
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/categorias/{id}")
     public ResponseEntity<Categorias> findById(@PathVariable Long id) {
         Optional<Categorias> categoriaOpt = categoriasRepository.findById(id);
@@ -59,6 +62,7 @@ public class CategoriasController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/categorias")
     public ResponseEntity<Categorias> create(@RequestBody Categorias categoria) {
         if (categoria.getId() != null) {
@@ -84,6 +88,7 @@ public class CategoriasController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/categorias")
     public ResponseEntity<Categorias> update(@RequestBody Categorias categoria) {
         if (categoria.getId() == null) {
@@ -106,6 +111,7 @@ public class CategoriasController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/categorias/{id}")
     public ResponseEntity<Categorias> delete(@PathVariable Long id) {
 
@@ -136,6 +142,7 @@ public class CategoriasController {
      * @return
      */
     @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/api/categorias")
     public ResponseEntity<Categorias> deleteAll() {
         log.info("Petición REST para eliminar todas las categorias");
