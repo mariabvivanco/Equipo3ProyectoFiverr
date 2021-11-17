@@ -3,11 +3,9 @@ package com.example.Equipo3ProyectoFiverr.entities;
 
 import com.example.Equipo3ProyectoFiverr.Idiomas;
 import com.example.Equipo3ProyectoFiverr.Paises;
-import javassist.bytecode.ByteArray;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,22 +26,22 @@ public class Trabajos {
 
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name="trabajos_empleadores",
-            joinColumns={
-                    @JoinColumn(name="id_trabajo", referencedColumnName = "id")
+    @JoinTable(name = "trabajos_empleadores",
+            joinColumns = {
+                    @JoinColumn(name = "id_trabajo", referencedColumnName = "id")
             },
-            inverseJoinColumns= {
-                    @JoinColumn(name = "id_empleador", referencedColumnName = "id") })
+            inverseJoinColumns = {
+                    @JoinColumn(name = "id_empleador", referencedColumnName = "id")})
     //@JsonManagedReference
     private Set<Empleadores> empleadores = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name="trabajos_categorias",
-            joinColumns={
-                    @JoinColumn(name="id_trabajo", referencedColumnName = "id")
+    @JoinTable(name = "trabajos_categorias",
+            joinColumns = {
+                    @JoinColumn(name = "id_trabajo", referencedColumnName = "id")
             },
-            inverseJoinColumns= {
-                    @JoinColumn(name = "id_categoria", referencedColumnName = "id") })
+            inverseJoinColumns = {
+                    @JoinColumn(name = "id_categoria", referencedColumnName = "id")})
     //@JsonManagedReference
     private Set<Categorias> categorias = new HashSet<>();
 
@@ -71,12 +69,10 @@ public class Trabajos {
     private Idiomas idiomas;
 
 
-
-
     public Trabajos() {
     }
 
-    public Trabajos(Long id, String nombre, String descripcion, Double precio,  Boolean verificado,
+    public Trabajos(Long id, String nombre, String descripcion, Double precio, Boolean verificado,
                     Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
@@ -118,7 +114,7 @@ public class Trabajos {
     }
 
     public Trabajos(Long id, String nombre, String descripcion, String image, Set<Empleadores> empleadores,
-                    Set<Categorias> categorias, Double precio,  Boolean verificado,
+                    Set<Categorias> categorias, Double precio, Boolean verificado,
                     LocalDate fecha, Paises pais, Idiomas idiomas) {
         this.id = id;
         this.nombre = nombre;
@@ -126,7 +122,7 @@ public class Trabajos {
         this.image = image;
         this.empleadores = empleadores;
         this.categorias = categorias;
-        this.precio= precio;
+        this.precio = precio;
         this.verificado = verificado;
         this.fecha = fecha;
         this.pais = pais;
@@ -172,7 +168,6 @@ public class Trabajos {
     public void setVerificado(Boolean verificado) {
         this.verificado = verificado;
     }
-
 
 
     public Paises getPais() {
@@ -224,26 +219,26 @@ public class Trabajos {
         this.categorias = categorias;
     }
 
-    public void addCategoria(Categorias categoria){
+    public void addCategoria(Categorias categoria) {
         categorias.add(categoria);
         categoria.getTrabajos().add(this);
     }
 
-    public void removeCategoria(Categorias categoria, boolean categoriaExists){
+    public void removeCategoria(Categorias categoria, boolean categoriaExists) {
         categorias.remove(categoria);
-        if (categoriaExists) {
+        if ( categoriaExists ) {
             categoria.getTrabajos().remove(this);
         }
     }
 
-    public void addEmpleador(Empleadores empleador){
+    public void addEmpleador(Empleadores empleador) {
         empleadores.add(empleador);
         empleador.getTrabajos().add(this);
     }
 
-    public void removeEmpleador(Empleadores empleador, boolean empleadorExists){
+    public void removeEmpleador(Empleadores empleador, boolean empleadorExists) {
         empleadores.remove(empleador);
-        if (empleadorExists) {
+        if ( empleadorExists ) {
             empleador.getTrabajos().remove(this);
         }
     }

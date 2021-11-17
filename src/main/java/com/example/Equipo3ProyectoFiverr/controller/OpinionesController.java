@@ -1,10 +1,7 @@
 package com.example.Equipo3ProyectoFiverr.controller;
 
 
-import com.example.Equipo3ProyectoFiverr.entities.Categorias;
-import com.example.Equipo3ProyectoFiverr.entities.Empleadores;
 import com.example.Equipo3ProyectoFiverr.entities.Opiniones;
-import com.example.Equipo3ProyectoFiverr.entities.Trabajos;
 import com.example.Equipo3ProyectoFiverr.repositories.CategoriasRepository;
 import com.example.Equipo3ProyectoFiverr.repositories.OpinionesRepository;
 import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 public class OpinionesController {
@@ -53,8 +49,8 @@ public class OpinionesController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/opiniones/{id}")
     public ResponseEntity<Opiniones> findById(@PathVariable Long id) {
-        Optional<Opiniones> opinionesOpt =opinionesRepository.findById(id);
-        if (opinionesOpt.isPresent()) {
+        Optional<Opiniones> opinionesOpt = opinionesRepository.findById(id);
+        if ( opinionesOpt.isPresent() ) {
             return ResponseEntity.ok(opinionesOpt.get());
         } else {
             return ResponseEntity.notFound().build();
@@ -71,7 +67,7 @@ public class OpinionesController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/opiniones")
     public ResponseEntity<Opiniones> create(@RequestBody Opiniones opinion) {
-        if (opinion.getId() != null) {
+        if ( opinion.getId() != null ) {
             log.warn("Intentando crear una opinion con id");
             return ResponseEntity.badRequest().build();
         }
@@ -90,11 +86,11 @@ public class OpinionesController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/opiniones")
     public ResponseEntity<Opiniones> update(@RequestBody Opiniones opinion) {
-        if (opinion.getId() == null) {
+        if ( opinion.getId() == null ) {
             log.warn("Intentando actualizar una opinion sin dar el id");
             return ResponseEntity.badRequest().build();
         }
-        if (!opinionesRepository.existsById(opinion.getId())) {
+        if ( !opinionesRepository.existsById(opinion.getId()) ) {
             log.warn("Intentando actualizar una opinion con id inexistente");
             return ResponseEntity.notFound().build();
         }
@@ -114,7 +110,7 @@ public class OpinionesController {
     @DeleteMapping("/api/opiniones/{id}")
     public ResponseEntity<Opiniones> delete(@PathVariable Long id) {
 
-        if (!opinionesRepository.existsById(id)) {
+        if ( !opinionesRepository.existsById(id) ) {
             log.warn("Intentando eliminar una opinión inexistente");
             return ResponseEntity.notFound().build();
         }
@@ -126,6 +122,7 @@ public class OpinionesController {
 
     /**
      * Eliminar todas las opiniones de la base de datos
+     *
      * @return
      */
     @CrossOrigin
@@ -139,7 +136,6 @@ public class OpinionesController {
 
         return ResponseEntity.noContent().build();
     }
-
 
 
 }

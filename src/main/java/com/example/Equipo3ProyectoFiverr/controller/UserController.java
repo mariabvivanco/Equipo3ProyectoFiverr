@@ -1,7 +1,6 @@
 package com.example.Equipo3ProyectoFiverr.controller;
 
 
-
 import com.example.Equipo3ProyectoFiverr.config.TokenProvider;
 import com.example.Equipo3ProyectoFiverr.dto.AuthToken;
 import com.example.Equipo3ProyectoFiverr.dto.LoginUser;
@@ -49,11 +48,10 @@ public class UserController {
 
     @CrossOrigin
     @PostMapping("/register")
-    public User saveUser(@RequestBody UserDto user){
+    public User saveUser(@RequestBody UserDto user) {
 
         return userService.save(user);
     }
-
 
 
 }

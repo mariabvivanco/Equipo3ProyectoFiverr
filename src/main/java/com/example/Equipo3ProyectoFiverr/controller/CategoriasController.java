@@ -48,7 +48,7 @@ public class CategoriasController {
     @GetMapping("/api/categorias/{id}")
     public ResponseEntity<Categorias> findById(@PathVariable Long id) {
         Optional<Categorias> categoriaOpt = categoriasRepository.findById(id);
-        if (categoriaOpt.isPresent()) {
+        if ( categoriaOpt.isPresent() ) {
             return ResponseEntity.ok(categoriaOpt.get());
         } else {
             return ResponseEntity.notFound().build();
@@ -65,19 +65,19 @@ public class CategoriasController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/categorias")
     public ResponseEntity<Categorias> create(@RequestBody Categorias categoria) {
-        if (categoria.getId() != null) {
+        if ( categoria.getId() != null ) {
             log.warn("Intentando crear una categoría con id");
             return ResponseEntity.badRequest().build();
         }
         List<Categorias> categorias = categoriasRepository.findAll();
-        for (Categorias categoriaEnRepo : categorias) {
-            if (categoriaEnRepo.getNombre().equals(categoria.getNombre())) {
+        for ( Categorias categoriaEnRepo : categorias ) {
+            if ( categoriaEnRepo.getNombre().equals(categoria.getNombre()) ) {
                 log.warn("Intentando crear una categoria ya existente");
                 return ResponseEntity.badRequest().build();
             }
         }
 
-       Categorias result = categoriasRepository.save(categoria);
+        Categorias result = categoriasRepository.save(categoria);
         return ResponseEntity.ok(result);
     }
 
@@ -91,11 +91,11 @@ public class CategoriasController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/categorias")
     public ResponseEntity<Categorias> update(@RequestBody Categorias categoria) {
-        if (categoria.getId() == null) {
+        if ( categoria.getId() == null ) {
             log.warn("Intentando actualizar una categoria sin dar el id");
             return ResponseEntity.badRequest().build();
         }
-        if (!categoriasRepository.existsById(categoria.getId())) {
+        if ( !categoriasRepository.existsById(categoria.getId()) ) {
             log.warn("Intentando actualizar una categoria con id inexistente");
             return ResponseEntity.notFound().build();
         }
@@ -115,18 +115,18 @@ public class CategoriasController {
     @DeleteMapping("/api/categorias/{id}")
     public ResponseEntity<Categorias> delete(@PathVariable Long id) {
 
-        if (!categoriasRepository.existsById(id)) {
+        if ( !categoriasRepository.existsById(id) ) {
             log.warn("Intentando eliminar una categoria inexistente");
             return ResponseEntity.notFound().build();
         }
 
         Optional<Categorias> categoriaOpt = categoriasRepository.findById(id);
-        if (categoriaOpt.isPresent()) {
+        if ( categoriaOpt.isPresent() ) {
             Categorias categoria = categoriaOpt.get();
-            System.out.println(categoria );
+            System.out.println(categoria);
             System.out.println(categoria.getTrabajos());
             Set<Trabajos> trabajos = categoria.getTrabajos();
-            for (Trabajos trabajo : trabajos) {
+            for ( Trabajos trabajo : trabajos ) {
                 trabajo.removeCategoria(categoria, false);
                 trabajosRepository.save(trabajo);
             }
@@ -139,6 +139,7 @@ public class CategoriasController {
 
     /**
      * Eliminar todas las categorias de la base de datos
+     *
      * @return
      */
     @CrossOrigin
@@ -148,9 +149,9 @@ public class CategoriasController {
         log.info("Petición REST para eliminar todas las categorias");
         List<Categorias> categorias = categoriasRepository.findAll();
 
-        for (Categorias categoria: categorias) {
+        for ( Categorias categoria : categorias ) {
             Set<Trabajos> trabajos = categoria.getTrabajos();
-            for (Trabajos trabajo: trabajos) {
+            for ( Trabajos trabajo : trabajos ) {
                 trabajo.removeCategoria(categoria, false);
                 trabajosRepository.save(trabajo);
             }

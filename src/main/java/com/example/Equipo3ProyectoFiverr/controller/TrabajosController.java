@@ -53,26 +53,26 @@ public class TrabajosController {
 
         List<Trabajos> trabajos = trabajosRepository.findAll();
         List<Opiniones> opiniones = opinionesRepository.findAll();
-        List<TrabajosDto> trabajosDto =new ArrayList<TrabajosDto>();
+        List<TrabajosDto> trabajosDto = new ArrayList<TrabajosDto>();
         TrabajosDto trabajoDto = new TrabajosDto();
 
-        for(int i=0; i<trabajos.size();i++){
-            trabajoDto = new TrabajosDto(trabajos.get(i).getId(),trabajos.get(i).getNombre(),trabajos.get(i).getImage(),
-                    trabajos.get(i).getDescripcion(), trabajos.get(i).getCategorias(),trabajos.get(i).getEmpleadores(),
-                    trabajos.get(i).getFecha(),trabajos.get(i).getPais(),trabajos.get(i).getIdiomas(),
+        for ( int i = 0; i < trabajos.size(); i++ ) {
+            trabajoDto = new TrabajosDto(trabajos.get(i).getId(), trabajos.get(i).getNombre(), trabajos.get(i).getImage(),
+                    trabajos.get(i).getDescripcion(), trabajos.get(i).getCategorias(), trabajos.get(i).getEmpleadores(),
+                    trabajos.get(i).getFecha(), trabajos.get(i).getPais(), trabajos.get(i).getIdiomas(),
                     trabajos.get(i).getPrecio());
 
-            int sumaOpiniones=0, cantOpiniones=0;
-            double promedio=0;
-            for (int j=0;j<opiniones.size();j++){
-                if ((opiniones.get(j).getTrabajo())==(trabajos.get(i))){
+            int sumaOpiniones = 0, cantOpiniones = 0;
+            double promedio = 0;
+            for ( int j = 0; j < opiniones.size(); j++ ) {
+                if ( (opiniones.get(j).getTrabajo()) == (trabajos.get(i)) ) {
                     cantOpiniones++;
-                    sumaOpiniones=sumaOpiniones+opiniones.get(j).getCalificacion();
+                    sumaOpiniones = sumaOpiniones + opiniones.get(j).getCalificacion();
                 }
             }
-            if (cantOpiniones>0){
+            if ( cantOpiniones > 0 ) {
                 trabajoDto.setOpiniones(cantOpiniones);
-                promedio = sumaOpiniones/cantOpiniones;
+                promedio = sumaOpiniones / cantOpiniones;
                 trabajoDto.setPromedio(promedio);
             }
             trabajosDto.add(trabajoDto);
@@ -93,7 +93,7 @@ public class TrabajosController {
     @GetMapping("/api/trabajos/{id}")
     public ResponseEntity<Trabajos> findById(@PathVariable Long id) {
         Optional<Trabajos> trabajosOpt = trabajosRepository.findById(id);
-        if (trabajosOpt.isPresent()) {
+        if ( trabajosOpt.isPresent() ) {
             return ResponseEntity.ok(trabajosOpt.get());
         } else {
             return ResponseEntity.notFound().build();
@@ -110,15 +110,15 @@ public class TrabajosController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/trabajos")
     public ResponseEntity<Trabajos> create(@RequestBody Trabajos trabajo) {
-        if(trabajo.getId() != null) {
+        if ( trabajo.getId() != null ) {
             log.warn("Intentando crear un trabajo con id");
             return ResponseEntity.badRequest().build();
         }
 
         Set<Categorias> categorias = trabajo.getCategorias();
 
-        for (Categorias categoria: categorias) {
-            if(categoria.getId() == null) {
+        for ( Categorias categoria : categorias ) {
+            if ( categoria.getId() == null ) {
                 log.info("Creando categoria inexistente: " + categoria.getNombre());
                 categoriasRepository.save(categoria);
             }
@@ -126,31 +126,31 @@ public class TrabajosController {
 
         Set<Empleadores> empleadores = trabajo.getEmpleadores();
 
-        for (Empleadores empleador: empleadores) {
-            if(empleador.getId() == null) {
+        for ( Empleadores empleador : empleadores ) {
+            if ( empleador.getId() == null ) {
                 log.info("Creando empleador inexistente: " + empleador.getNombre());
                 empleadoresRepository.save(empleador);
             }
         }
 
-       Trabajos trabajoAGuardar = new Trabajos(
+        Trabajos trabajoAGuardar = new Trabajos(
 
-               null,
-               trabajo.getNombre(),
-               trabajo.getDescripcion(),
-               trabajo.getImage(),
-               trabajo.getPrecio(),
-               trabajo.getVerificado(),
-               trabajo.getFecha(),
-               trabajo.getPais(),
-               trabajo.getIdiomas()
+                null,
+                trabajo.getNombre(),
+                trabajo.getDescripcion(),
+                trabajo.getImage(),
+                trabajo.getPrecio(),
+                trabajo.getVerificado(),
+                trabajo.getFecha(),
+                trabajo.getPais(),
+                trabajo.getIdiomas()
 
         );
 
-        for (Empleadores empleador: trabajo.getEmpleadores()) {
+        for ( Empleadores empleador : trabajo.getEmpleadores() ) {
             trabajoAGuardar.addEmpleador(empleador);
         }
-        for (Categorias categoria: trabajo.getCategorias()) {
+        for ( Categorias categoria : trabajo.getCategorias() ) {
             trabajoAGuardar.addCategoria(categoria);
         }
 
@@ -168,19 +168,19 @@ public class TrabajosController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/trabajos")
     public ResponseEntity<Trabajos> update(@RequestBody Trabajos trabajo) {
-        if (trabajo.getId() == null) {
+        if ( trabajo.getId() == null ) {
             log.warn("Intentando actualizar un trabajo inexistente");
             return ResponseEntity.badRequest().build();
         }
-        if (!trabajosRepository.existsById(trabajo.getId())) {
+        if ( !trabajosRepository.existsById(trabajo.getId()) ) {
             log.warn("Intentando actualizar un trabajo inexistente");
             return ResponseEntity.notFound().build();
         }
 
         Set<Categorias> categorias = trabajo.getCategorias();
 
-        for (Categorias categoria: categorias) {
-            if(categoria.getId() == null) {
+        for ( Categorias categoria : categorias ) {
+            if ( categoria.getId() == null ) {
                 log.info("Creando categoria inexistente: " + categoria.getNombre());
                 categoriasRepository.save(categoria);
             }
@@ -188,8 +188,8 @@ public class TrabajosController {
 
         Set<Empleadores> empleadores = trabajo.getEmpleadores();
 
-        for (Empleadores empleador: empleadores) {
-            if(empleador.getId() == null) {
+        for ( Empleadores empleador : empleadores ) {
+            if ( empleador.getId() == null ) {
                 log.info("Creando empleador inexistente: " + empleador.getNombre());
                 empleadoresRepository.save(empleador);
             }
@@ -197,7 +197,7 @@ public class TrabajosController {
 
 
         Optional<Trabajos> trabajoOpt = trabajosRepository.findById(trabajo.getId());
-        if (trabajoOpt.isPresent()) {
+        if ( trabajoOpt.isPresent() ) {
             Trabajos trabajoAntiguo = trabajoOpt.get();
             desvincularCategorias(trabajoAntiguo);
             desvincularEmpleadores(trabajoAntiguo);
@@ -217,10 +217,10 @@ public class TrabajosController {
 
         );
 
-        for (Empleadores empleador: trabajo.getEmpleadores()) {
+        for ( Empleadores empleador : trabajo.getEmpleadores() ) {
             trabajoAGuardar.addEmpleador(empleador);
         }
-        for (Categorias categoria: trabajo.getCategorias()) {
+        for ( Categorias categoria : trabajo.getCategorias() ) {
             trabajoAGuardar.addCategoria(categoria);
         }
 
@@ -231,6 +231,7 @@ public class TrabajosController {
 
     /**
      * Eliminar un trabajo en la base de datos
+     *
      * @param id
      * @return
      */
@@ -239,13 +240,13 @@ public class TrabajosController {
     @DeleteMapping("/api/trabajos/{id}")
     public ResponseEntity<Trabajos> delete(@PathVariable Long id) {
 
-        if (!trabajosRepository.existsById(id)) {
+        if ( !trabajosRepository.existsById(id) ) {
             log.warn("Intentando eliminar un trabajo inexistente");
             return ResponseEntity.notFound().build();
         }
 
         Optional<Trabajos> trabajoOpt = trabajosRepository.findById(id);
-        if (trabajoOpt.isPresent()) {
+        if ( trabajoOpt.isPresent() ) {
             Trabajos trabajoAnterior = trabajoOpt.get();
             desvincularCategorias(trabajoAnterior);
             desvincularEmpleadores(trabajoAnterior);
@@ -267,7 +268,7 @@ public class TrabajosController {
     public ResponseEntity<Trabajos> deleteAll() {
 
         List<Trabajos> trabajos = trabajosRepository.findAll();
-        for (Trabajos trabajo : trabajos) {
+        for ( Trabajos trabajo : trabajos ) {
             desvincularCategorias(trabajo);
             desvincularEmpleadores(trabajo);
 
@@ -288,7 +289,7 @@ public class TrabajosController {
      */
     private void desvincularCategorias(Trabajos trabajo) {
         Set<Categorias> categoriasABorrar = new HashSet<>(trabajo.getCategorias());
-        for (Categorias categoria : categoriasABorrar) {
+        for ( Categorias categoria : categoriasABorrar ) {
             trabajo.removeCategoria(categoria, true);
         }
     }
@@ -300,7 +301,7 @@ public class TrabajosController {
      */
     private void desvincularEmpleadores(Trabajos trabajo) {
         Set<Empleadores> empleadoresABorrar = new HashSet<>(trabajo.getEmpleadores());
-        for (Empleadores empleador: empleadoresABorrar) {
+        for ( Empleadores empleador : empleadoresABorrar ) {
             trabajo.removeEmpleador(empleador, true);
         }
     }

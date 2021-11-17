@@ -6,8 +6,6 @@ import com.example.Equipo3ProyectoFiverr.entities.Categorias;
 import com.example.Equipo3ProyectoFiverr.entities.Empleadores;
 
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -27,6 +25,10 @@ public class TrabajosDto {
     private Set<Categorias> categorias = new HashSet<>();
     private Set<Empleadores> empleadores = new HashSet<>();
     private LocalDate fecha;
+    @Enumerated//(EnumType.ORDINAL)
+    private Paises pais;
+    @Enumerated//(EnumType.ORDINAL)
+    private Idiomas idiomas;
 
     public TrabajosDto() {
     }
@@ -42,14 +44,8 @@ public class TrabajosDto {
         this.fecha = fecha;
         this.pais = pais;
         this.idiomas = idiomas;
-        this.precio=precio;
+        this.precio = precio;
     }
-
-    @Enumerated//(EnumType.ORDINAL)
-    private Paises pais;
-
-    @Enumerated//(EnumType.ORDINAL)
-    private Idiomas idiomas;
 
     public Long getId() {
         return id;

@@ -23,7 +23,7 @@ public class Categorias {
 
     @ManyToMany(mappedBy = "categorias", fetch = FetchType.EAGER)
     @JsonBackReference
-    private Set<Trabajos> trabajos= new HashSet<>();
+    private Set<Trabajos> trabajos = new HashSet<>();
 
     public Categorias() {
 

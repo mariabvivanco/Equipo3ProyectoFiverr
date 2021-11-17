@@ -4,7 +4,7 @@ package com.example.Equipo3ProyectoFiverr.dto;
 import com.example.Equipo3ProyectoFiverr.entities.User;
 
 public class UserDto {
-    
+
     private String username;
     private String password;
     private String email;
@@ -61,7 +61,7 @@ public class UserDto {
         this.businessTitle = businessTitle;
     }
 
-    public User getUserFromDto(){
+    public User getUserFromDto() {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -69,8 +69,8 @@ public class UserDto {
         user.setPhone(phone);
         user.setName(name);
         user.setBusinessTitle(businessTitle);
-        
+
         return user;
     }
-    
+
 }

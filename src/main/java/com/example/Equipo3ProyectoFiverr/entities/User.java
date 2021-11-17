@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="ob_user")
+@Table(name = "ob_user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -31,6 +31,16 @@ public class User {
 
     @Column
     private String businessTitle;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLES",
+            joinColumns = {
+                    @JoinColumn(name = "USER_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "ROLE_ID")})
+
+
+    private Set<Role> roles;
 
     public User(long id, String username, String password, String email,
                 String phone, String name, String businessTitle, Set<Role> roles) {
@@ -43,6 +53,7 @@ public class User {
         this.businessTitle = businessTitle;
         this.roles = roles;
     }
+
     public User(long id, String username, String password, String email,
                 String phone, String name, String businessTitle) {
         this.id = id;
@@ -54,20 +65,10 @@ public class User {
         this.businessTitle = businessTitle;
 
     }
-    public User(){
+
+    public User() {
 
     }
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_ROLES",
-            joinColumns = {
-            @JoinColumn(name = "USER_ID")
-            },
-            inverseJoinColumns = {
-            @JoinColumn(name = "ROLE_ID") })
-
-
-    private Set<Role> roles;
 
     public long getId() {
         return id;

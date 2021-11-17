@@ -1,4 +1,5 @@
 package com.example.Equipo3ProyectoFiverr.service;
+
 import com.example.Equipo3ProyectoFiverr.dto.UserDto;
 import com.example.Equipo3ProyectoFiverr.entities.Role;
 import com.example.Equipo3ProyectoFiverr.entities.User;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        if(user == null){
+        if ( user == null ) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         User nUser = user.getUserFromDto();
 
-        if(userRepository.existsByEmail(nUser.getEmail()))
+        if ( userRepository.existsByEmail(nUser.getEmail()) )
             throw new EmailAlreadyExistsException("Email ocupado");
 
         nUser.setPassword(bcryptEncoder.encode(user.getPassword()));
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
 
-        if(nUser.getEmail().split("@")[1].equals("admin.edu")){
+        if ( nUser.getEmail().split("@")[1].equals("admin.edu") ) {
             role = roleService.findByName("ADMIN");
             roleSet.add(role);
         }

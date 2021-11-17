@@ -1,10 +1,8 @@
 package com.example.Equipo3ProyectoFiverr.controller;
 
 
-import com.example.Equipo3ProyectoFiverr.entities.Categorias;
 import com.example.Equipo3ProyectoFiverr.entities.Empleadores;
 import com.example.Equipo3ProyectoFiverr.entities.Trabajos;
-import com.example.Equipo3ProyectoFiverr.repositories.CategoriasRepository;
 import com.example.Equipo3ProyectoFiverr.repositories.EmpleadoresRepository;
 import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
 import org.slf4j.Logger;
@@ -50,7 +48,7 @@ public class EmpleadoresController {
     @GetMapping("/api/empleadores/{id}")
     public ResponseEntity<Empleadores> findById(@PathVariable Long id) {
         Optional<Empleadores> empleadoresOpt = empleadoresRepository.findById(id);
-        if (empleadoresOpt.isPresent()) {
+        if ( empleadoresOpt.isPresent() ) {
             return ResponseEntity.ok(empleadoresOpt.get());
         } else {
             return ResponseEntity.notFound().build();
@@ -67,13 +65,13 @@ public class EmpleadoresController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/api/empleadores")
     public ResponseEntity<Empleadores> create(@RequestBody Empleadores empleador) {
-        if (empleador.getId() != null) {
+        if ( empleador.getId() != null ) {
             log.warn("Intentando crear un empleado con id");
             return ResponseEntity.badRequest().build();
         }
         List<Empleadores> empleadores = empleadoresRepository.findAll();
-        for (Empleadores empleadorEnRepo : empleadores) {
-            if (empleadorEnRepo.getNombre().equals(empleador.getNombre())) {
+        for ( Empleadores empleadorEnRepo : empleadores ) {
+            if ( empleadorEnRepo.getNombre().equals(empleador.getNombre()) ) {
                 log.warn("Intentando crear un empleador ya existente");
                 return ResponseEntity.badRequest().build();
             }
@@ -93,11 +91,11 @@ public class EmpleadoresController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/api/empleadores")
     public ResponseEntity<Empleadores> update(@RequestBody Empleadores empleador) {
-        if (empleador.getId() == null) {
+        if ( empleador.getId() == null ) {
             log.warn("Intentando actualizar un empleador sin dar el id");
             return ResponseEntity.badRequest().build();
         }
-        if (!empleadoresRepository.existsById(empleador.getId())) {
+        if ( !empleadoresRepository.existsById(empleador.getId()) ) {
             log.warn("Intentando actualizar un empleaador con id inexistente");
             return ResponseEntity.notFound().build();
         }
@@ -117,18 +115,18 @@ public class EmpleadoresController {
     @DeleteMapping("/api/empleadores/{id}")
     public ResponseEntity<Empleadores> delete(@PathVariable Long id) {
 
-        if (!empleadoresRepository.existsById(id)) {
+        if ( !empleadoresRepository.existsById(id) ) {
             log.warn("Intentando eliminar un empleador inexistente");
             return ResponseEntity.notFound().build();
         }
 
         Optional<Empleadores> empleadorOpt = empleadoresRepository.findById(id);
-        if (empleadorOpt.isPresent()) {
+        if ( empleadorOpt.isPresent() ) {
             Empleadores empleador = empleadorOpt.get();
-            System.out.println(empleador );
+            System.out.println(empleador);
             System.out.println(empleador.getTrabajos());
-            Set<Trabajos> trabajos =empleador.getTrabajos();
-            for (Trabajos trabajo : trabajos) {
+            Set<Trabajos> trabajos = empleador.getTrabajos();
+            for ( Trabajos trabajo : trabajos ) {
                 trabajo.removeEmpleador(empleador, false);
                 trabajosRepository.save(trabajo);
             }
@@ -141,6 +139,7 @@ public class EmpleadoresController {
 
     /**
      * Eliminar todos los empleadores de la base de datos
+     *
      * @return
      */
     @CrossOrigin
@@ -150,9 +149,9 @@ public class EmpleadoresController {
         log.info("Petición REST para eliminar todos los empleadores");
         List<Empleadores> empleadores = empleadoresRepository.findAll();
 
-        for (Empleadores empleador: empleadores) {
+        for ( Empleadores empleador : empleadores ) {
             Set<Trabajos> trabajos = empleador.getTrabajos();
-            for (Trabajos trabajo: trabajos) {
+            for ( Trabajos trabajo : trabajos ) {
                 trabajo.removeEmpleador(empleador, false);
                 trabajosRepository.save(trabajo);
             }
@@ -162,7 +161,6 @@ public class EmpleadoresController {
 
         return ResponseEntity.noContent().build();
     }
-
 
 
 }
