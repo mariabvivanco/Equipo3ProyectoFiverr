@@ -1,6 +1,5 @@
 package com.example.Equipo3ProyectoFiverr;
 
-import com.example.Equipo3ProyectoFiverr.Services.ServiceImages;
 import com.example.Equipo3ProyectoFiverr.entities.Categorias;
 import com.example.Equipo3ProyectoFiverr.entities.Empleadores;
 import com.example.Equipo3ProyectoFiverr.entities.Opiniones;
@@ -108,29 +107,17 @@ public class Equipo3ProyectoFiverrApplication {
 				"Diseñaré el logo de tu empresa con las últimas tecnologías (Gimp, Paint).",
 				TipoEmpresa.Particular,Paises.España);
 
-		//Les asignamos una imagen
-		ServiceImages generaImagen = new ServiceImages();
-		String imagen1 = generaImagen.randomURLGenerator("smile");
-		String imagen2 = generaImagen.randomURLGenerator("smile");
-		String imagen3 = generaImagen.randomURLGenerator("smile");
-		String imagen4 = generaImagen.randomURLGenerator("smile");
-		String imagen5 = generaImagen.randomURLGenerator("smile");
-		String imagen6 = generaImagen.randomURLGenerator("smile");
-		String imagen7 = generaImagen.randomURLGenerator("smile");
-		String imagen8 = generaImagen.randomURLGenerator("smile");
-		String imagen9 = generaImagen.randomURLGenerator("smile");
-		String imagen10 = generaImagen.randomURLGenerator("smile");
 
-		usuario1.setImage(imagen1);
-		usuario1.setImage(imagen2);
-		usuario1.setImage(imagen3);
-		usuario1.setImage(imagen4);
-		usuario1.setImage(imagen5);
-		usuario1.setImage(imagen6);
-		usuario1.setImage(imagen7);
-		usuario1.setImage(imagen8);
-		usuario1.setImage(imagen9);
-		usuario1.setImage(imagen10);
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario1.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
 
 
 		//Se guardan los ojbetos de usuario como una lista
@@ -201,7 +188,8 @@ public class Equipo3ProyectoFiverrApplication {
 				"\n" +
 				"Puedo aportar ideas creativas basadas en los requisitos especiales de mis clientes.",
 				745.6,Boolean.TRUE,Paises.Cuba,Idiomas.Español);
-		//Le asignamos una fecha
+
+
 		trabajo1.setFecha(fecha1);
 		trabajo2.setFecha(fecha2);
 		trabajo3.setFecha(fecha3);
@@ -212,11 +200,6 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo8.setFecha(fecha4);
 		trabajo9.setFecha(fecha4);
 		trabajo10.setFecha(fecha4);
-
-
-		//les asignamos una categoría
-		List<Categorias> categorias1 = Arrays.asList(desarrolloDeAplicacionesWeb, desarrolloDeAplicacionesWeb);
-		List<Categorias> categorias2 = Arrays.asList(disenoWeb, disenoGrafico);
 
 
 		trabajo1.addEmpleador(usuario1);
@@ -231,28 +214,16 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo10.addEmpleador(usuario10);
 
 
-		//les asignamos una foto
-		String image11 = generaImagen.randomURLGenerator("design");
-		String image12 = generaImagen.randomURLGenerator("web");
-		String image13 = generaImagen.randomURLGenerator("web");
-		String image14 = generaImagen.randomURLGenerator("animation");
-		String image15 = generaImagen.randomURLGenerator("web");
-		String image16 = generaImagen.randomURLGenerator("web");
-		String image17 = generaImagen.randomURLGenerator("phone");
-		String image18 = generaImagen.randomURLGenerator("web");
-		String image19 = generaImagen.randomURLGenerator("web");
-		String image20 = generaImagen.randomURLGenerator("design");
-
-		trabajo1.setImage(image11);
-		trabajo2.setImage(image12);
-		trabajo3.setImage(image13);
-		trabajo4.setImage(image14);
-		trabajo5.setImage(image15);
-		trabajo6.setImage(image16);
-		trabajo7.setImage(image17);
-		trabajo8.setImage(image18);
-		trabajo9.setImage(image19);
-		trabajo10.setImage(image20);
+		trabajo1.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo2.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo3.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo4.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo5.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo6.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo7.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo8.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo9.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo10.setImage("https://source.unsplash.com/featured/?web/600x300/1");
 
 		trabajo1.addCategoria(disenoWeb);
 		trabajo2.addCategoria(desarrolloDeAplicacionesWeb);
@@ -278,10 +249,6 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajosRepository.save(trabajo8);
 		trabajosRepository.save(trabajo9);
 		trabajosRepository.save(trabajo10);
-
-//		trabajosRepository.saveAll(Arrays.asList(trabajo1,trabajo2,trabajo3,trabajo4,trabajo5,
-//		trabajo6,trabajo7,trabajo8,trabajo9,trabajo10));
-
 
 		//Opiniones trabajo 1
 		Opiniones o1 = new Opiniones(null,4,"Una web increíble. Justo lo que necesitaba. Volveré a repetir sin duda.\n" +
