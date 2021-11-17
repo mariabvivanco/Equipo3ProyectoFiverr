@@ -34,7 +34,6 @@ public class Empleadores {
     private Set<Trabajos> trabajos= new HashSet<>();
 
 
-
     public Empleadores() {
     }
 
