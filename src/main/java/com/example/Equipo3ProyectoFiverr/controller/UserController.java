@@ -47,12 +47,30 @@ public class UserController {
     }
 
 
-    @CrossOrigin
+    /*@CrossOrigin
     @PostMapping("/register")
     public User saveUser(@RequestBody UserDto user){
 
         return userService.save(user);
+    }*/
+
+    @CrossOrigin
+    @PostMapping("/register")
+    public ResponseEntity<?> saveUser(@RequestBody UserDto user) throws AuthenticationException{
+
+        userService.save(user);
+        final Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getUsername(),
+                        user.getPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        final String token = jwtTokenUtil.generateToken(authentication);
+        return ResponseEntity.ok(new AuthToken(token));
     }
+
+
 
 
 
