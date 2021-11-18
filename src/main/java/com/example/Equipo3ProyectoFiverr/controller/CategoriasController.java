@@ -1,9 +1,12 @@
 package com.example.Equipo3ProyectoFiverr.controller;
 
 
+import com.example.Equipo3ProyectoFiverr.dto.TrabajosDto;
 import com.example.Equipo3ProyectoFiverr.entities.Categorias;
+import com.example.Equipo3ProyectoFiverr.entities.Opiniones;
 import com.example.Equipo3ProyectoFiverr.entities.Trabajos;
 import com.example.Equipo3ProyectoFiverr.repositories.CategoriasRepository;
+import com.example.Equipo3ProyectoFiverr.repositories.OpinionesRepository;
 import com.example.Equipo3ProyectoFiverr.repositories.TrabajosRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -22,10 +26,13 @@ public class CategoriasController {
 
     private CategoriasRepository categoriasRepository;
     private TrabajosRepository trabajosRepository;
+    private OpinionesRepository opinionesRepository;
 
-    public CategoriasController(CategoriasRepository categoriasRepository, TrabajosRepository trabajosRepository) {
+    public CategoriasController(CategoriasRepository categoriasRepository, TrabajosRepository trabajosRepository,
+                                OpinionesRepository opinionesRepository) {
         this.categoriasRepository = categoriasRepository;
         this.trabajosRepository = trabajosRepository;
+        this.opinionesRepository = opinionesRepository;
     }
 
     /**
@@ -46,14 +53,49 @@ public class CategoriasController {
     @CrossOrigin
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/api/categorias/{id}")
-    public ResponseEntity<Categorias> findById(@PathVariable Long id) {
+    public List<TrabajosDto> findById(@PathVariable Long id) {
         Optional<Categorias> categoriaOpt = categoriasRepository.findById(id);
         if (categoriaOpt.isPresent()) {
-            return ResponseEntity.ok(categoriaOpt.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+            Set<Trabajos> trabajos1 = categoriaOpt.get().getTrabajos();
+
+            List<Trabajos> trabajos = new ArrayList<>(trabajos1);
+
+
+
+
+
+            List<Opiniones> opiniones = opinionesRepository.findAll();
+            List<TrabajosDto> trabajosDto =new ArrayList<>();
+            TrabajosDto trabajoDto = new TrabajosDto();
+            for (int i=0; i<trabajos.size();i++) {
+                    trabajoDto = new TrabajosDto(trabajos.get(i).getId(), trabajos.get(i).getNombre(), trabajos.get(i).getImage(),
+                            trabajos.get(i).getDescripcion(), trabajos.get(i).getCategorias(), trabajos.get(i).getEmpleadores(),
+                            trabajos.get(i).getFecha(), trabajos.get(i).getPais(), trabajos.get(i).getIdiomas(),
+                            trabajos.get(i).getPrecio());
+                    int sumaOpiniones = 0, cantOpiniones = 0;
+                    double promedio = 0;
+                    for (int j = 0; j < opiniones.size(); j++) {
+                        if ((opiniones.get(j).getTrabajo()) == (trabajos.get(i))) {
+                            cantOpiniones++;
+                            sumaOpiniones = sumaOpiniones + opiniones.get(j).getCalificacion();
+                        }
+                    }
+                    if (cantOpiniones > 0) {
+                        trabajoDto.setOpiniones(cantOpiniones);
+                        promedio = sumaOpiniones / cantOpiniones;
+                        trabajoDto.setPromedio(promedio);
+                    }
+                    trabajosDto.add(trabajoDto);
+
+                }
+            return trabajosDto;
+
+            }
+
+
+           return null;
     }
+
 
     /**
      * Crear categoria nueva en la bbdd.
