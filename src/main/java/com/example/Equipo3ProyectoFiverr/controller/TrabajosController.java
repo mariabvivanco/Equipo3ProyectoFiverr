@@ -82,6 +82,46 @@ public class TrabajosController {
 
         return trabajosDto;
     }
+    /**
+     * Buscar trabajos según id con json adaptado
+     * Request
+     * Response
+     */
+    @CrossOrigin
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @GetMapping("/api/trabajos/{id}")
+    public ResponseEntity<TrabajosDto> findByIdAdaptado(@PathVariable Long id) {
+        Optional<Trabajos> trabajosOpt = trabajosRepository.findById(id);
+        if (trabajosOpt.isPresent()){
+            List<Opiniones> opiniones = opinionesRepository.findAll();
+            TrabajosDto trabajoDto;
+
+            trabajoDto = new TrabajosDto(trabajosOpt.get().getId(),trabajosOpt.get().getNombre(),trabajosOpt.get().getImage(),
+                    trabajosOpt.get().getDescripcion(), trabajosOpt.get().getCategorias(),trabajosOpt.get().getEmpleadores(),
+                    trabajosOpt.get().getFecha(),trabajosOpt.get().getPais(),trabajosOpt.get().getIdiomas(),
+                    trabajosOpt.get().getPrecio());
+
+            int sumaOpiniones=0, cantOpiniones=0;
+            double promedio=0;
+            for (int j=0;j<opiniones.size();j++){
+                if ((opiniones.get(j).getTrabajo())==(trabajosOpt.get())){
+                    cantOpiniones++;
+                    sumaOpiniones=sumaOpiniones+opiniones.get(j).getCalificacion();
+                }
+            }
+            if (cantOpiniones>0){
+                trabajoDto.setOpiniones(cantOpiniones);
+                promedio = sumaOpiniones/cantOpiniones;
+                trabajoDto.setPromedio(promedio);
+            }
+            return ResponseEntity.ok(trabajoDto);
+
+        }
+
+        else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     /**
      * Buscar trabajos según id
@@ -90,9 +130,11 @@ public class TrabajosController {
      */
     @CrossOrigin
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @GetMapping("/api/trabajos/{id}")
+    @GetMapping("/api/trabajostodos/{id}")
     public ResponseEntity<Trabajos> findById(@PathVariable Long id) {
         Optional<Trabajos> trabajosOpt = trabajosRepository.findById(id);
+
+
         if (trabajosOpt.isPresent()) {
             return ResponseEntity.ok(trabajosOpt.get());
         } else {
