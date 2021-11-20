@@ -129,6 +129,62 @@ public class Equipo3ProyectoFiverrApplication {
 		usuario9.setImage("https://source.unsplash.com/featured/?smile/600x300/4161");
 		usuario10.setImage("https://source.unsplash.com/featured/?smile/600x300/4162");
 
+		//11 Marketing Digital
+		Empleadores usuario11 = new Empleadores(null, "marketking", "Hi I'm marketking, a consultant " +
+				"helping entrepreneurs scale their businesses with digital products and online courses.", TipoEmpresa.Particular, Paises.EstadosUnidos);
+
+		//12 Marketing Digital
+		Empleadores usuario12 = new Empleadores(null, "sensationalbusiness", "Looking for new strategies to grow your Business?Are you fed up with these periods of Favour " +
+				"and Famine that follow you throughout the year? Do you dream of reaching 7- or 8-Figures?", TipoEmpresa.Particular, Paises.EstadosUnidos);
+
+		//13
+		Empleadores usuario13 = new Empleadores(null, "americanlegend", "I am an individual who Believes in Hard and Accurate Work. " +
+				"My main motive is to work Accurately, Efficiently and Professionally. ", TipoEmpresa.Particular, Paises.EstadosUnidos);
+		//14 SEO
+
+		Empleadores usuario14= new Empleadores(null, "obSEOssed", "I have more then 6+ years experience of SEO. " +
+				"I can provide all kinds of SEO services which will help to get huge traffic", TipoEmpresa.Empresa, Paises.EstadosUnidos);
+		//15
+
+		Empleadores usuario15= new Empleadores(null, "marketeggs", "I just love market and eggs, man!", TipoEmpresa.Particular, Paises.ReinoUnido);
+		//16 SEO
+
+		Empleadores usuario16= new Empleadores(null, "benedictSEO", " We're an online marketing agency which specializes in Search Engine Optimization", TipoEmpresa.Empresa, Paises.ReinoUnido);
+		//17 SEO
+
+		Empleadores usuario17= new Empleadores(null, "immortalUK22", "I have been in the SEO industries for over " +
+				"9 years I have ranked many websites in my SEO Career,", TipoEmpresa.Particular, Paises.ReinoUnido);
+
+		//18 SEO
+		Empleadores usuario18= new Empleadores(null, "seodeutch", "Verschaffen Sie sich einen Vorsprung vor Ihrer Konkurrenz mit meinen SEO-, Website-Analyse-, " +
+				"Website-Promotion- und anderen Dienstleistungen. Ich bin ein britischer Verkäufer, der in Frankreich lebt.", TipoEmpresa.Particular, Paises.Alemania);
+
+		//19 Marketing Digital
+		Empleadores usuario19= new Empleadores(null, "marketverkauft", "Hallo, ich bin marketverkauft. Wir bieten unseren Kunden die " +
+				"strategische Unterstützung, die sie für ein florierendes Unternehmen benötigen.", TipoEmpresa.Empresa, Paises.Alemania);
+
+		//20 SEO
+		Empleadores usuario20= new Empleadores(null, "elisss33", "Ich habe mehr als 100+ Zufriedene Kunden, " +
+				"Sie erhalten eine gute Anzahl von Verkäufen und Verkehr von meinem besten SEO-Service. ", TipoEmpresa.Empresa, Paises.Alemania);
+
+
+
+		usuario11.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario12.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario13.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario14.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario15.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario16.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario17.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario18.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario19.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+		usuario20.setImage("https://source.unsplash.com/featured/?smile/600x300/1");
+
+
+		//Se guardan los ojbetos de usuario como una lista
+		empleadoresRepository.saveAll(Arrays.asList(usuario11, usuario12, usuario13, usuario14,
+				usuario15, usuario16, usuario17, usuario18, usuario19, usuario20));
+
 
 		//Se guardan los ojbetos de usuario como una lista
 		empleadoresRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3, usuario4,
@@ -231,6 +287,9 @@ public class Equipo3ProyectoFiverrApplication {
 				745.6,Boolean.TRUE,Paises.Cuba,Idiomas.Español);
 
 
+
+
+
 		trabajo1.setFecha(fecha1);
 		trabajo2.setFecha(fecha2);
 		trabajo3.setFecha(fecha3);
@@ -241,6 +300,7 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo8.setFecha(fecha4);
 		trabajo9.setFecha(fecha4);
 		trabajo10.setFecha(fecha4);
+
 
 
 		trabajo1.addEmpleador(usuario1);
@@ -255,6 +315,7 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo10.addEmpleador(usuario10);
 
 
+
 		trabajo1.setImage("https://source.unsplash.com/featured/?web/600x300/4191");
 		trabajo2.setImage("https://source.unsplash.com/featured/?web/600x300/4192");
 		trabajo3.setImage("https://source.unsplash.com/featured/?web/600x300/4193");
@@ -266,6 +327,7 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo9.setImage("https://source.unsplash.com/featured/?web/600x300/4199");
 		trabajo10.setImage("https://source.unsplash.com/featured/?web/600x300/4200");
 
+
 		trabajo1.addCategoria(disenoWeb);
 		trabajo2.addCategoria(desarrolloDeAplicacionesWeb);
 		trabajo3.addCategoria(desarrolloDeAplicacionesWeb);
@@ -276,6 +338,7 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajo8.addCategoria(disenoWeb);
 		trabajo9.addCategoria(disenoWeb);
 		trabajo10.addCategoria(disenoWeb);
+
 
 		//guardamos las entidades en el repositorio
 
@@ -292,6 +355,117 @@ public class Equipo3ProyectoFiverrApplication {
 		trabajosRepository.save(trabajo10);
 		trabajosRepository.save(trabajo21);
 		trabajosRepository.save(trabajo22);
+
+
+		Trabajos trabajo11 = new Trabajos(null, "I will scale your business " +
+				"with digital products", "When people search your name on a search engine (Google) then will show an Information " +
+				"Box in Google Top right site. This Information Box is Google Knowledge Panel.",
+				34.99, Boolean.TRUE, Paises.EstadosUnidos, Idiomas.Ingles);
+		Trabajos trabajo12 = new Trabajos(null, "I will make you reach 7 " +
+				"figures", "Whether it is an e-commerce organization or an average " +
+				"brick-and-mortar trade, if you want to maximize your success, " +
+				"you ought to be proficient in how to successfully market your business on the internet.",
+				29.99, Boolean.TRUE, Paises.EstadosUnidos, Idiomas.Ingles);
+		Trabajos trabajo13 = new Trabajos(null, "I will make your business " +
+				"skyrocket", "I can help you to boost your productivity, social media presence and improve the quality of your marketing results. You should harness " +
+				"the power of virtual assistants by integrating them into your marketing strategy. ",
+				15.99, Boolean.TRUE, Paises.EstadosUnidos, Idiomas.Ingles);
+		Trabajos trabajo14 = new Trabajos(null, "I will provide you the best " +
+				"SEO services", "The posts will be listed on the homepage of " +
+				"our site for a limited time until new posts are published.",
+				49.99, Boolean.TRUE, Paises.EstadosUnidos, Idiomas.Ingles);
+		Trabajos trabajo15 = new Trabajos(null, "I will optimize your searches " +
+				"on the Internet", "This will help your website gain trust & authority and traction " +
+				"with the search engines to rank higher in the search results.",
+				44.00, Boolean.TRUE, Paises.ReinoUnido, Idiomas.Ingles);
+		Trabajos trabajo16 = new Trabajos(null, "I will make your website " +
+				"reach a top tier", "You will improve your website according to search engine terms " +
+				"and conditions by taking our special “on-page optimization” package.n",
+				69.99, Boolean.TRUE, Paises.ReinoUnido, Idiomas.Ingles);
+		Trabajos trabajo17 = new Trabajos(null, "I will make your website " +
+				"be successfull", "In my standard & premium packs, I will include one week of on-site S.E.O," +
+				" implementing changes & fixes necessary (10 pages) to help you rank higher. ",
+				34.99, Boolean.TRUE, Paises.ReinoUnido, Idiomas.Ingles);
+		Trabajos trabajo18 = new Trabajos(null, "Ich werde Ihre Website zur " +
+				"meistgesuchten Website machen", "Es gibt über 200 SEO-Faktoren und Backlinks sind einer " +
+				"der wichtigsten Faktoren der Offpage-SEO. Backlinks geben Signale an Google.",
+				19.99, Boolean.TRUE, Paises.Alemania, Idiomas.Alemán);
+		Trabajos trabajo19 = new Trabajos(null, "Ich werde dafür sorgen, dass Ihr " +
+				"Unternehmen seine Gewinne steigert", "Sie erhalten 100% operative " +
+				"E-Commerce-Website / Shop mit sicheren pyament Gateway. " +
+				"Auch erhalten Sie voll funktionsfähige Dashboard, wo Sie Inventar/Produkte " +
+				"verwalten können und verfolgen Bestellungen und Zahlungen.n",
+				150.00, Boolean.TRUE, Paises.Alemania, Idiomas.Alemán);
+		Trabajos trabajo20 = new Trabajos(null, "Ich werde Ihr SEO erstaunlich machen", "Wenn Sie Ihre Website auf der ersten Seite von Google platzieren möchten," +
+				" um mehr Umsatz und Traffic zu erhalten, dann sind Sie hier genau richtig. ",
+				33.44, Boolean.TRUE, Paises.Alemania, Idiomas.Alemán);
+
+		;
+
+
+
+		trabajo11.setFecha(fecha1);
+		trabajo12.setFecha(fecha2);
+		trabajo13.setFecha(fecha3);
+		trabajo14.setFecha(fecha3);
+		trabajo15.setFecha(fecha4);
+		trabajo16.setFecha(fecha1);
+		trabajo17.setFecha(fecha4);
+		trabajo18.setFecha(fecha4);
+		trabajo19.setFecha(fecha4);
+		trabajo20.setFecha(fecha4);
+
+
+		trabajo11.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo12.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo13.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo14.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo15.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo16.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo17.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo18.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo19.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+		trabajo20.setImage("https://source.unsplash.com/featured/?web/600x300/1");
+
+
+
+		trabajo11.addEmpleador(usuario11);
+		trabajo12.addEmpleador(usuario12);
+		trabajo13.addEmpleador(usuario13);
+		trabajo14.addEmpleador(usuario14);
+		trabajo15.addEmpleador(usuario15);
+		trabajo16.addEmpleador(usuario16);
+		trabajo17.addEmpleador(usuario17);
+		trabajo18.addEmpleador(usuario18);
+		trabajo19.addEmpleador(usuario19);
+		trabajo20.addEmpleador(usuario20);
+
+
+
+		trabajo11.addCategoria(marketingDigital);
+		trabajo12.addCategoria(marketingDigital);
+		trabajo13.addCategoria(marketingDigital);
+		trabajo14.addCategoria(seo);
+		trabajo15.addCategoria(marketingDigital);
+		trabajo16.addCategoria(seo);
+		trabajo17.addCategoria(seo);
+		trabajo18.addCategoria(seo);
+		trabajo19.addCategoria(marketingDigital);
+		trabajo20.addCategoria(seo);
+
+		//guardamos las entidades en el repositorio
+
+
+		trabajosRepository.save(trabajo11);
+		trabajosRepository.save(trabajo12);
+		trabajosRepository.save(trabajo13);
+		trabajosRepository.save(trabajo14);
+		trabajosRepository.save(trabajo15);
+		trabajosRepository.save(trabajo16);
+		trabajosRepository.save(trabajo17);
+		trabajosRepository.save(trabajo18);
+		trabajosRepository.save(trabajo19);
+		trabajosRepository.save(trabajo20);
 
 
 
@@ -376,6 +550,64 @@ public class Equipo3ProyectoFiverrApplication {
 				"genera muy buenas propuestas creativas con un alto nivel profesional",trabajo10,usuario2);
 		opinionesRepository.saveAll(Arrays.asList(o28, o29, o30));
 
+		Opiniones o31 = new Opiniones(null,5,"Excelente trabajo, increible los resultados obtenidos"
+				,trabajo11,usuario4);
+		opinionesRepository.save(o31);
+		//Opiniones trabajo 11
+
+		Opiniones o32 = new Opiniones(null, 5, "It was nice " +
+				"working with you. Thanks for your service!", trabajo11, usuario13);
+		Opiniones o33 = new Opiniones(null, 5, "Lovely services. " +
+				"Would hire them again! " +
+				"\n", trabajo11, usuario14);
+		opinionesRepository.saveAll(Arrays.asList(o31, o32, o33));
+
+		//Opiniones trabajo 12
+
+		Opiniones o34 = new Opiniones(null, 5, "The best" +
+				" digital marketing services ever!", trabajo12, usuario11);
+		Opiniones o35 = new Opiniones(null, 5, "It was nice " +
+				"working with you. Thanks for your service!", trabajo12, usuario13);
+		Opiniones o36 = new Opiniones(null, 5, "He helepd me " +
+				"to grow my business" +
+				"\n", trabajo12, usuario14);
+		opinionesRepository.saveAll(Arrays.asList(o34, o35, o36));
+
+		//Opiniones trabajo 13
+
+		Opiniones o37 = new Opiniones(null, 5, "Took a " +
+				"realistic approach to my problem. Thank you :)", trabajo13, usuario14);
+		Opiniones o38 = new Opiniones(null, 5, "My website " +
+				"is the first one in the Search Engines", trabajo13, usuario15);
+		Opiniones o39 = new Opiniones(null, 5, "Before your " +
+				"work, my website wuld not show up on Google. Thank you!", trabajo13, usuario16);
+		opinionesRepository.saveAll(Arrays.asList(o37, o38, o39));
+
+		//Opiniones trabajo 14
+		Opiniones o40 = new Opiniones(null, 5, "Took a realistic" +
+				" approach to my problem. Thank you :)", trabajo14, usuario12);
+		//Opiniones trabajo 15
+		Opiniones o41 = new Opiniones(null, 5, "My website is " +
+				"the first one in the Search Engines", trabajo15, usuario16);
+		//Opiniones trabajo 16
+		Opiniones o42 = new Opiniones(null, 5, "Before your work, " +
+				"my website wuld not show up on Google. Thank you!", trabajo16, usuario17);
+		opinionesRepository.saveAll(Arrays.asList(o40, o41, o42));
+
+		//Opiniones trabajo 17
+		Opiniones o43 = new Opiniones(null, 5, "Took a " +
+				"realistic approach to my problem. Thank you :)", trabajo17, usuario12);
+		//Opiniones trabajo 18
+		Opiniones o44 = new Opiniones(null, 5, "My website i" +
+				"s the first one in the Search Engines", trabajo18, usuario13);
+		//Opiniones trabajo 19
+		Opiniones o45 = new Opiniones(null, 5, "Before your " +
+				"work, my website wuld not show up on Google. Thank you!", trabajo19, usuario14);
+		//Opiniones trabajo 20
+		Opiniones o46 = new Opiniones(null, 5, "Took a " +
+				"realistic approach to my problem. Thank you :)", trabajo20, usuario12);
+		opinionesRepository.saveAll(Arrays.asList(o40, o41, o42, o46));
+
 		Role role1 = new Role(1,"ADMIN", "Rol Admin");
 		Role role2 = new Role(2,"USER", "Rol User");
 		roleRepository.save(role1);
@@ -389,6 +621,9 @@ public class Equipo3ProyectoFiverrApplication {
 
 
 
+
 	}
+
+
 
 }
