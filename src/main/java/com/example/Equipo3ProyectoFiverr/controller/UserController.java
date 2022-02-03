@@ -47,12 +47,6 @@ public class UserController {
     }
 
 
-    /*@CrossOrigin
-    @PostMapping("/register")
-    public User saveUser(@RequestBody UserDto user){
-
-        return userService.save(user);
-    }*/
 
     @CrossOrigin
     @PostMapping("/register")
