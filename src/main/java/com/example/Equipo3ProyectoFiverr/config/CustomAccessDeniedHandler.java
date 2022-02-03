@@ -22,8 +22,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException e) throws IOException, ServletException {
 
-        // You can create your own repsonse here to handle method level access denied reponses..
-        // Follow similar method to the bad credentials handler above.
+
         System.out.println("Ejecutando CustomAccessDeniedHandler");
         response.setStatus(HttpStatus.FORBIDDEN.value());
         response.setContentType("application/json");
